@@ -23042,17 +23042,143 @@ AABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Answer:"><strong>Answer:</strong><a class="anchor-link" href="#Answer:">&#182;</a></h3><ol>
-<li><p>In total, about 72.5% of the variance is explained by the first and second principal component.</p>
-</li>
-<li><p>In total, about 92.8% of the variance is explained by the first four principal components.</p>
-</li>
-<li></li>
-</ol>
-<p>The graph above shows the cumulative variance explained by each additional PCA dimension. The bar graphs indicate the about of positive or negative weight each feature plays in defining that PCA dimension. In this case, the magnitude or size of the bar is important to notice: the larger the bar the greater the influence of that feature in defining that principal component dimension. It is also important to see how the sign of the features compares for the features of greatest magnitude.</p>
+<h3 id="Answer:"><strong>Answer:</strong><a class="anchor-link" href="#Answer:">&#182;</a></h3><p>1. In total, about 72.5% of the variance is explained by the first and second principal component.</p>
+<p>2. In total, about 92.8% of the variance is explained by the first four principal components.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#in general, for each pca dimension we have the following values</span>
+<span class="n">pca_results</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[29]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Explained Variance</th>
+      <th>Fresh</th>
+      <th>Milk</th>
+      <th>Grocery</th>
+      <th>Frozen</th>
+      <th>Detergents_Paper</th>
+      <th>Delicatessen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Dimension 1</th>
+      <td>0.4993</td>
+      <td>-0.0976</td>
+      <td>0.4109</td>
+      <td>0.4511</td>
+      <td>-0.1280</td>
+      <td>0.7595</td>
+      <td>0.1579</td>
+    </tr>
+    <tr>
+      <th>Dimension 2</th>
+      <td>0.7252</td>
+      <td>0.5032</td>
+      <td>0.5479</td>
+      <td>0.5363</td>
+      <td>0.5020</td>
+      <td>0.7219</td>
+      <td>0.6213</td>
+    </tr>
+    <tr>
+      <th>Dimension 3</th>
+      <td>0.8301</td>
+      <td>-0.2420</td>
+      <td>0.7023</td>
+      <td>0.5159</td>
+      <td>0.7690</td>
+      <td>0.4870</td>
+      <td>1.1635</td>
+    </tr>
+    <tr>
+      <th>Dimension 4</th>
+      <td>0.9279</td>
+      <td>0.0247</td>
+      <td>0.8398</td>
+      <td>0.5869</td>
+      <td>0.0557</td>
+      <td>0.1713</td>
+      <td>1.7080</td>
+    </tr>
+    <tr>
+      <th>Dimension 5</th>
+      <td>0.9767</td>
+      <td>0.0361</td>
+      <td>1.5481</td>
+      <td>0.9037</td>
+      <td>0.1228</td>
+      <td>-0.3016</td>
+      <td>1.2960</td>
+    </tr>
+    <tr>
+      <th>Dimension 6</th>
+      <td>1.0000</td>
+      <td>-0.0182</td>
+      <td>1.0304</td>
+      <td>1.7304</td>
+      <td>0.1699</td>
+      <td>-0.5096</td>
+      <td>1.2866</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3. The graph above shows the cumulative variance explained by each additional PCA dimension. The bar graphs indicate the about of positive or negative weight each feature plays in defining that PCA dimension. In this case, the magnitude or size of the bar is important to notice: the larger the bar the greater the influence of that feature in defining that principal component dimension. It is also important to see how the sign of the features compares for the features of greatest magnitude.</p>
 <p>For example, notice in the first dimension, the features with greatest magnitude are 'Detergents_Paper' and 'Milk'. They both have positive weights, thus this first principal component is primarily governed by the positive correlation between those two features. Notice also that both Frozen and Fresh have small negative values indicating the values of Frozen and Fresh vary indirectly with the linear subspace defined by the first PCA dimension. However, they both have quite large weight values for the second PCA subpsace dimension, so they have strong influence on the shape of the second dimension. The relationship of customer spending not captured by Frozen and Fresh in the first principal component is captured by the large magnitude of the weights of those features in the second principal component.</p>
 <p>We can now take a closer look at the first four dimensions and see how they best represent customer spending. In the fourth component, the features with largest magnitude are 'Frozen' and 'Delicatessen'. In addition, 'Frozen' has negative weight while 'Delicatessen' has positive weight. This indicates that the strongest influence on PC4 is given by the negative correlation between those two features. A similar story could be told by 'Fresh' and 'Delicatessen' in PC3. However, in the second principal component, the features 'Fresh' and 'Delicatessen' and 'Frozen' have greatest magnitudes and all have positive weight.</p>
 <p>Therefore, while PC2 does a good job representing those customers whose spending exhibits a strong, positive correlation between the variables 'Fresh', 'Frozen' and 'Delicatessen', PC3 instead differentiates those customers whose spending has a strong, negative correlation between 'Frozen' and 'Delicatessen'. While, PC4 does a better job representing those customers with negative correlation between 'Frozen' and 'Fresh'. So by the time we get to four principal components, the key positive/negative relationships of customer spending have been mostly represented and the total variance explained is quite high, 92.8%.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Looking at each dimension we can make the following explanations for the cumulative variance in each dimension.
+<br>Dimension 1: has a large, positive emphasis on Detergents_paper with smaller, still positive emphasis on Grocery and Milk. This kind of spending is best represented by spending on retail.
+<br> Dimension 2: Has large positive emphasis on Fresh, Frozen and Delicatessen. This spending could be represented by small market.
+<br> Dimension 3: Has a very large, negative emphasis on Fresh, while having a large positive emphasis on Delicatessen. This spending could be represented by a small market that sells prepared or frozen foods. 
+<br> Dimension 4: Is similar to Dimension 4 but has large negative emphasis on Frozen but large positive emphasis on Delicatessen. This negative emphasis on Frozen could be indicative of a small cafe. 
+<br> Dimension 5: This dimension has the largest positive emphasis on Milk and Grocery. However, negative emphasis on Delicatessen and Detergents_paper. This could be a retailer shop. 
+<br> Dimension 6: This last component of the PCA we did has a very high weight on Grocery but quite large negative emphasis on Milk. This spending could be indicative of a restaurant or hotel.</p>
 
 </div>
 </div>
